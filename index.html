@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Биография</title>
+    <!-- Подключаем Telegram SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1e1e22;
+            --accent-yellow: #e5fe40;
+            --text-main: #ffffff;
+            --text-secondary: #9e9ea7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: 80px; /* Отступ под нижнюю кнопку */
+        }
+
+        /* Верхняя часть с фоном и аватаркой */
+        .header {
+            position: relative;
+            background: linear-gradient(180deg, #2a2a32 0%, var(--bg-color) 100%);
+            padding: 40px 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .avatar-container {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #2a2a32;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            margin-bottom: 16px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Табы / Переключатели */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            padding: 10px 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-top: 10px;
+        }
+
+        .tab {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background-color: var(--accent-yellow);
+            color: #000000;
+        }
+
+        /* Контентная часть */
+        .content {
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .bio-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d1d1d6;
+        }
+
+        .bio-text p {
+            margin-bottom: 14px;
+        }
+
+        /* Нижняя фиксированная кнопка */
+        .footer-action {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 20px;
+            background: linear-gradient(180deg, rgba(18,18,20,0) 0%, var(--bg-color) 40%);
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-contact {
+            width: 100%;
+            max-width: 400px;
+            background-color: var(--accent-yellow);
+            color: #000000;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(229, 254, 64, 0.2);
+            transition: transform 0.1s ease;
+        }
+
+        .btn-contact:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка профиля -->
+    <div class="header">
+        <div class="avatar-container">
+            <!-- Замените ссылку на ваше фото -->
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Фото профиля">
+        </div>
+        <h1 class="name">Рассел Кроу</h1>
+        <p class="subtitle">Актер • Режиссер • Директор</p>
+    </div>
+
+    <!-- Табы управления -->
+    <div class="tabs">
+        <button class="tab active">Об актере</button>
+        <button class="tab">Фильмография</button>
+        <button class="tab">Изображения</button>
+    </div>
+
+    <!-- Основной блок с текстом -->
+    <div class="content">
+        <h2 class="section-title">Биография</h2>
+        <div class="bio-text">
+            <p>Рассел Кроу родился 7 апреля 1964 года в Веллингтоне (Новая Зеландия) в семье Алекса и Джоселин Кроу. Брат Терри Кроу. Когда Рассу было 4 года, его семья переехала в Сидней.</p>
+            <p>В возрасте 5 лет он появился в эпизоде австралийского телесериала Spyforce, продюсером которого стал Крэнни, крестный отец его матери.</p>
+        </div>
+    </div>
+
+    <!-- Фиксированная кнопка связи снизу -->
+    <div class="footer-action">
+        <!-- Укажите ваш юзернейм вместо t.me/your_username -->
+        <a href="https://t.me/your_username" target="_blank" class="btn-contact">Написать в ЛС</a>
+    </div>
+
+    <script>
+        // Инициализация Telegram WebApp
+        if (window.Telegram && window.Telegram.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand(); // Разворачиваем окно на весь экран
+            tg.setHeaderColor('#121214'); // Задаем цвет верхнего бара
+            tg.setBackgroundColor('#121214');
+        }
+    </script>
+</body>
+</html>
